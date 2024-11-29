@@ -26,22 +26,23 @@ Este é um projeto de estudo de um **site de chat** desenvolvido com a bibliotec
 ## 🏗️ Estrutura do Projeto
 
 ```plaintext
-chat-web/
+chatbotDjango/
 │
-├── chat/                  # Aplicativo principal do chat
-│   ├── migrations/        # Arquivos de migração do banco de dados
-│   ├── templates/         # Arquivos HTML do chat
-│   ├── views.py           # Lógica das páginas e APIs
-│   ├── models.py          # Modelos do banco de dados
-│   ├── urls.py            # Rotas do aplicativo
-│   └── ...                
+├── apps /chat/                  # Aplicativo principal do chat
+          │   ├── migrations/        # Arquivos de migração do banco de dados
+          │   ├── templates/         # Arquivos HTML do chat
+          │   ├── views.py           # Lógica das páginas e APIs
+          │   ├── models.py          # Modelos do banco de dados
+          │   ├── urls.py            # Rotas do aplicativo
+          │   └── ...                
 │
-├── chat_web/              # Configurações gerais do projeto Django
+├── chatbot/              # Configurações gerais do projeto Django
 │   ├── settings.py        # Configurações do projeto
 │   ├── urls.py            # Rotas principais do projeto
 │   └── ...
 │
 ├── static/                # Arquivos estáticos (CSS, JavaScript, imagens)
+├── templates/               # Arquivos de paginas (HTML5)
 ├── db.sqlite3             # Banco de dados SQLite
 ├── manage.py              # Comando principal do Django
 └── README.md              # Documentação do projeto
