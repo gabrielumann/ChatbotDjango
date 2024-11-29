@@ -1,9 +1,10 @@
-const $chatMessages = document.querySelector(".messages")
-const $inputMessage = document.querySelector(".form-control")
+const $chatMessages = Qs(".messages")
+
 const getMessages = async (room_id) => {
     const roomActive = (room_id) => {
-        document.querySelectorAll(".list-rooms li").forEach((e) => e.classList.remove("active"))
-        document.querySelector(`#room-${room_id}`).classList.add("active")
+        QsAll(".list-rooms li").forEach((e) => e.classList.remove("active"))
+        Qs(`#room-${room_id}`).classList.add("active")
+        Qs("#selected-room").value = room_id;
     }
 
     let response = await fetch(`/${room_id}`)
@@ -14,15 +15,22 @@ const getMessages = async (room_id) => {
     roomActive(room_id);
 }
 
-const insertMessage = async () => {
-    console.log("submit")
-    let response = await fetch(`/${room_id}`)
+const sendMessage = async (data) => {
+    let response = await fetch(`send/${data.room_id}`, {
+        method: "POST",
+        headers: {'X-CSRFToken': data.csrfmiddlewaretoken},
+        body: JSON.stringify(data)
+    })
     const html = await response.text();
-    $chatMessages.innerHTML = html
-    roomActive(room_id);
+    const $uniqueMessage = Qs(".unique-message")
+    $uniqueMessage.innerHTML += html
+    Qs("form").reset()
 }
 
-$inputMessage.addEventListener("submit", (e) => {
-    e.preventDefault
-    insertMessage()
+Qs(".send-message").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    const data = Object.fromEntries(new FormData(ev.target).entries())
+    sendMessage(data)
 })
+
+getMessages(1)
